@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <style>
+  	.bgimg1{
+  		  background-image: url("img/bg.jpg");
+		  position: relative;
+		  background-position: center;
+		  background-repeat: no-repeat;
+		  background-size: cover;
+		  
+		  height: 100%;
+		}
+		body, html {
+		  height: 100%;
+		  margin: 0;
+		}
+
+		
+
+	</style>
+
+  <body>
+    
+    <header role="banner" style="padding:20px">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">Foody</a>
+        </div>
+      </nav>
+    </header>
+
+	<div class="bgimg1">
+		<div class="container" style="border:5px solid black; position: absolute;top: 10%; width:80%;left: 10%; right:10%;text-align: center; padding: 25px;">  
+			<div class="my:20px" style="border:1px solid black; font-size: 2rem; letter-spacing: 10px; display: inline-block; padding: 5px">
+				LOGIN 
+			</div>
+			<form id="login-form" action="" method="post" style="font-size: 2rem; width: 80%; margin: auto;">
+          <div id="wronglogin" class="alert alert-danger" role="alert" style="display:none; font-size: 1rem; margin: 15px 0px; border-radius: 0px; text-align:center;">
+            <i class="fas fa-exclamation-circle"></i>  Please Enter Valid Details
+          </div>
+			    <div  class="form-group" style="margin:10px; opacity: 0.6">
+			      <input class="form-control" placeholder="Email ID" id="login-email" type="email" required>
+			    </div>
+			    <div  class="form-group" style="margin:10px; opacity: 0.6">
+			      <input class="form-control" placeholder="Password" id="login-password" type="password" minlength="8" required>
+			    </div>
+			    <button class="btn" type="submit" style="margin:10px">Login</button>
+      </form>    
+			    <a href="#" style="display: block; font-size: small;" id="forgotpassword" onclick="showDiv()">Forgot password? </a>
+          <div  class="form-group" id="hiddendiv" style="margin:10px; opacity: 0.6; display: none;">
+            <input class="form-control" placeholder="Registered EmailID" id="reset-email" type="email">
+            <button class="btn" type="submit" id="resetbtn" style="margin:10px; opacity: 1">Submit</button>
+          </div>
+          <div id="invalid-email" class="alert alert-danger" role="alert" style="display:none; font-size: 1rem; margin: 15px 0px; border-radius: 0px; text-align:center;">
+            <i class="fas fa-exclamation-circle"></i>  Please Enter Valid Details
+          </div>
+          <div id="valid-email" class="alert alert-success" role="alert" style="display:none; font-size: 1rem; margin: 15px 0px; border-radius: 0px; text-align:center;">
+            Email Sent!
+          </div>
+			    <a href="newuser.html"  style="display: block; font-size: small;">New User? Sign up :) </a>
+		</div>
+	</div>
+	    
+
+    <!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#cf1d16"/></svg></div>
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBMtWc2eSZY4iP2tBTwDUCYthDYdJbSKvk",
+    authDomain: "softeng-ca5ca.firebaseapp.com",
+    databaseURL: "https://softeng-ca5ca.firebaseio.com",
+    projectId: "softeng-ca5ca",
+    storageBucket: "softeng-ca5ca.appspot.com",
+    messagingSenderId: "408327246826",
+    appId: "1:408327246826:web:9abe5e21d0f4fce3e2d893",
+    measurementId: "G-Q396W6J4M3"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  //Authentication and Firestore
+    const auth = firebase.auth();
+  const db = firebase.firestore();
+
+</script>
+
+    <script src="js/popper.min.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/login.js"></script>
+    <script src="js/loader.js"></script>
+    
+  </body>
+</html>
