@@ -19,6 +19,7 @@
 		  background-position: center;
 		  background-repeat: no-repeat;
 		  background-size: cover;
+      opacity: 0.9;
 		  
 		  height: 100%;
 		}
@@ -42,11 +43,11 @@
     </header>
 
 	<div class="bgimg1">
-		<div class="container" style="border:5px solid black; position: absolute;top: 10%; width:80%;left: 10%; right:10%;text-align: center; padding: 25px;">  
+		<div class="container" id="login-box" style="border:5px solid black; position: absolute;top: 10%; width:60%;left: 10%; right:10%;text-align: center; padding: 25px;">  
 			<div class="my:20px" style="border:1px solid black; font-size: 2rem; letter-spacing: 10px; display: inline-block; padding: 5px">
 				LOGIN 
 			</div>
-			<form id="login-form" action="" method="post" style="font-size: 2rem; width: 80%; margin: auto;">
+			<form id="login-form" action="" method="post" style="font-size: 2rem; width: 60%; margin: auto;">
           <div id="wronglogin" class="alert alert-danger" role="alert" style="display:none; font-size: 1rem; margin: 15px 0px; border-radius: 0px; text-align:center;">
             <i class="fas fa-exclamation-circle"></i>  Please Enter Valid Details
           </div>
@@ -59,7 +60,7 @@
 			    <button class="btn" type="submit" style="margin:10px">Login</button>
       </form>    
 			    <a href="#" style="display: block; font-size: small;" id="forgotpassword" onclick="showDiv()">Forgot password? </a>
-          <div  class="form-group" id="hiddendiv" style="margin:10px; opacity: 0.6; display: none;">
+          <div  class="form-group" id="hiddendiv" style="margin:10px; opacity: 0.6; display: none; width: 60%">
             <input class="form-control" placeholder="Registered EmailID" id="reset-email" type="email">
             <button class="btn" type="submit" id="resetbtn" style="margin:10px; opacity: 1">Submit</button>
           </div>
