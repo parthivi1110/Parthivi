@@ -1,4 +1,3 @@
-
 firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
    	document.getElementsByTagName("body")[0].style.display = "none"
