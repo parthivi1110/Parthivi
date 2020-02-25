@@ -18,20 +18,22 @@ firebase.auth().onAuthStateChanged(function(user) {
 		update.addEventListener('submit', (e) => {
 			e.preventDefault();
 
-			var newPassword = document.getElementById('newpassword').value;
-			user.updatePassword(newPassword).then(function() {
-			  console.log("SUCCESS CHANGE")
-			}).catch(function(error) {
-			  console.log(error)
-			});
 			db.collection('users').doc(user.uid).update({
 				dob: document.getElementById("newdob").value,
 				name: document.getElementById("newusername").value,
 				adhaar: document.getElementById("newadhaar").value,
 				address: document.getElementById("newaddress").value
 			}).then(function(){
+				var newPassword = document.getElementById('newpassword').value;
+				user.updatePassword(newPassword).then(function() {
 				document.getElementById("update-details").style.display = "block";
 				$('#update-details').delay(3000).fadeOut('slow');
+				}).catch(function(error) {
+				  	auth.signOut().then(() => {	
+						window.location = "login.html";
+					})
+					alert(error)
+				});
 			}).catch(function(eror){
 				document.getElementById("wrong-details").style.display = "block";
 				$('#wrong-details').delay(3000).fadeOut('slow');

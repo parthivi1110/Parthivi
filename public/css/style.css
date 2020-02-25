@@ -17,6 +17,11 @@ a {
   a:hover {
     text-decoration: none; }
 
+.navbar-toggler:focus,.navbar-toggler:active {
+   outline: none !important;
+   box-shadow: none;
+}
+
 h1, h2, h3, h4, h5 {
   color: #000; }
 
