@@ -71,7 +71,7 @@ header {
         background: none !important;
         position: relative; } 
 
-@media (max-width: 700px) {
+@media (max-width: 770px) {
   #login-form{
     width: 100% !important;
   }  
@@ -81,6 +81,10 @@ header {
   }
   #hiddendiv{
     width: 100%;
+  }
+  #updateuser{
+        width: auto !important;
+
   }
 }
 

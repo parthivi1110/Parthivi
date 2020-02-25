@@ -1,3 +1,4 @@
+
 //Login
 
 const login = document.querySelector("#login-form");
@@ -9,7 +10,6 @@ login.addEventListener('submit', (e) => {
 	const password = login['login-password'].value;
 
 	auth.signInWithEmailAndPassword(email, password).then(cred => {
-		console.log(cred.user);
 		window.location="home.html";
 		login.reset();
 	}).catch(err => {
