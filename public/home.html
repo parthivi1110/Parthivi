@@ -21,15 +21,22 @@
         <button class="navbar-toggler" type="button" style="background:white" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01"  style="background: gray; opacity: 0.9">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01" >
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
           <form class="form-inline my-2 my-lg-0">
-            <a id="userDetails" href="user.html" class="btn btn-white btn-outline-white" style="margin: 5px">User Details</a>
+            <a id="userDetails" href="user.html" class="btn btn-white btn-outline-white" style="margin: 5px">Account Settings</a>
             <a id="logout" class="btn btn-white btn-outline-white" style="color: white; margin: 5px;">Logout</a>
           </form>
         </div>
       </nav>
     </header>
+
+
+
+
+    <div class="container">
+      <img src="https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80">
+    </div>
 
 
 
@@ -71,6 +78,18 @@
 <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-firestore.js"></script>
 
 <script>
+   document.querySelector(".navbar-toggler").addEventListener('click', (e) => {
+        if ($("#navbarTogglerDemo01").hasClass("show") == true ) {
+           document.getElementById("navbarTogglerDemo01").style.background = "";
+        } else {
+          document.getElementById("navbarTogglerDemo01").style.background = "gray";
+          document.getElementById("navbarTogglerDemo01").style.opacity = "0.8";
+        }
+
+      })
+
+
+
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyBMtWc2eSZY4iP2tBTwDUCYthDYdJbSKvk",
