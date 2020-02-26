@@ -88,15 +88,9 @@ firebase.auth().onAuthStateChanged(function(user) {
 			docs1.forEach(doc1 => {
 				docid1 = doc1.id
 				db.collection('users').doc(user.uid).collection('wallet').doc(docid1).get().then( doc => {
+					bonus = 200;
+					db.collection('users').doc(user.uid).collection('wallet').doc(docid1).set({balance:bonus}, {merge: true})
 				  	document.getElementById('walletm').innerHTML = doc.data().balance;
-				  // 	db.collection('users').doc(user.uid).collection('wallet').doc(docid1).collection('cards').get().then( docs2 => {
-				  // 		docs2.forEach(doc2 => {
-						// 	docid2 = doc2.id
-						// 	db.collection('users').doc(user.uid).collection('wallet').doc(docid1).collection('cards').doc(docid2).get().then( doc => {
-						// 	  	renderCard(doc);
-						// 	})
-						// })  	
-				  // 	})
 				})
 			})	
 		})	  
