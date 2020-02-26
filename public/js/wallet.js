@@ -60,15 +60,19 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 			cross.addEventListener('click',(e) => {
 				e.stopPropagation();
-				let id = e.target.parentElement.parentElement.getAttribute('data-id');
+				let temp1 = e.target.parentElement;
+				let temp2 = temp1.parentElement;
+				let id = temp2.parentElement.getAttribute('data-id');
 				db.collection('users').doc(user.uid).collection('wallet').get().then(docs1 =>{	
 					docs1.forEach(doc1 => {
-						docid1 = doc1.id
+						docid1 = doc1.id						
 						db.collection('users').doc(user.uid).collection('wallet').doc(docid1).get().then( doc => {
 						  	db.collection('users').doc(user.uid).collection('wallet').doc(docid1).collection('cards').doc(id).delete();
 						})
 					})	
 				})
+				document.getElementById("deletedcard").style.display = "block";
+				$('#deletedcard').delay(3000).fadeOut('slow');
 			})
 
 		}
@@ -85,14 +89,14 @@ firebase.auth().onAuthStateChanged(function(user) {
 				docid1 = doc1.id
 				db.collection('users').doc(user.uid).collection('wallet').doc(docid1).get().then( doc => {
 				  	document.getElementById('walletm').innerHTML = doc.data().balance;
-				  	db.collection('users').doc(user.uid).collection('wallet').doc(docid1).collection('cards').get().then( docs2 => {
-				  		docs2.forEach(doc2 => {
-							docid2 = doc2.id
-							db.collection('users').doc(user.uid).collection('wallet').doc(docid1).collection('cards').doc(docid2).get().then( doc => {
-							  	renderCard(doc);
-							})
-						})  	
-				  	})
+				  // 	db.collection('users').doc(user.uid).collection('wallet').doc(docid1).collection('cards').get().then( docs2 => {
+				  // 		docs2.forEach(doc2 => {
+						// 	docid2 = doc2.id
+						// 	db.collection('users').doc(user.uid).collection('wallet').doc(docid1).collection('cards').doc(docid2).get().then( doc => {
+						// 	  	renderCard(doc);
+						// 	})
+						// })  	
+				  // 	})
 				})
 			})	
 		})	  
@@ -121,8 +125,32 @@ firebase.auth().onAuthStateChanged(function(user) {
 					})
 				})	
 			})
-			new_card.reset();
-			
+			new_card.reset(); 
+   			$('#exampleModalCenter').modal('toggle');
+   			document.getElementById("addedcard").style.display = "block";
+			$('#addedcard').delay(3000).fadeOut('slow');		
 		});
+
+
+
+		//Real time listener
+		db.collection('users').doc(user.uid).collection('wallet').get().then(docs1 =>{	
+			docs1.forEach(doc1 => {
+				docid1 = doc1.id
+				db.collection('users').doc(user.uid).collection('wallet').doc(docid1).get().then( doc => {
+				  	db.collection('users').doc(user.uid).collection('wallet').doc(docid1).collection('cards').onSnapshot( snapshot => {
+				  		let changes = snapshot.docChanges();
+				  		changes.forEach(change => {
+				  			if(change.type == 'added'){
+				  				renderCard(change.doc);
+				  			}else if(change.type = 'removed'){
+				  				let div = newcard.querySelector('[data-id=' + change.doc.id + ']');
+				  				newcard.removeChild(div);
+				  			}
+				  		})
+				  	})
+				})
+			})
+		})
 	}
 });
