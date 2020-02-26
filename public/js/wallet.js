@@ -83,16 +83,25 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 	  	db.collection('users').doc(user.uid).get().then(doc => {
 		  	document.getElementById('walletun').innerHTML = doc.data().name;
-		})  	
+		})  
+
+
+
+	  	bonus = 200;
+		db.collection('users').doc(user.uid).collection('wallet').doc(wallet.id).set({balance:bonus}, {merge: true});   
+
+		// db.collection('users').doc(user.uid).collection('wallet').get().then(docs1 =>{	
+		// 	docs1.forEach(doc1 => {
+		// 		docid1 = doc1.id
+		// 		return db.collection('users').doc(user.uid).collection('wallet').doc(docid1).set({balance:bonus}, {merge: true})
+		// 		document.getElementById('walletm').innerHTML = doc.data().balance;
+		// 	})
+		// })		
+
 		db.collection('users').doc(user.uid).collection('wallet').get().then(docs1 =>{	
-			docs1.forEach(doc1 => {
-				docid1 = doc1.id
-				db.collection('users').doc(user.uid).collection('wallet').doc(docid1).get().then( doc => {
-					bonus = 200;
-					db.collection('users').doc(user.uid).collection('wallet').doc(docid1).set({balance:bonus}, {merge: true})
+				db.collection('users').doc(user.uid).collection('wallet').doc(wallet.id).get().then( doc => {
 				  	document.getElementById('walletm').innerHTML = doc.data().balance;
-				})
-			})	
+				})	
 		})	  
 
 
