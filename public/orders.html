@@ -171,6 +171,7 @@
   <script src="js/loader.js"></script>
   <script src="js/user.js"></script>
   <script src="js/wallet.js"></script>
+  <script src="js/logout.js"></script>
 
   <script type="text/javascript">
 
@@ -185,22 +186,6 @@
     })
 
 
-
-    $('[data-type="adhaar-number"]').keyup(function () {
-      var value = $(this).val();
-      value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
-      $(this).val(value);
-    });
-
-    $('[data-type="adhaar-number"]').on("change, blur", function () {
-      var value = $(this).val();
-      var maxLength = $(this).attr("maxLength");
-      if (value.length != maxLength) {
-        $(this).addClass("highlight-error");
-      } else {
-        $(this).removeClass("highlight-error");
-      }
-    });
   </script>
 
 </body>
