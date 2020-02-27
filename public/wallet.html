@@ -82,7 +82,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-12">
                       <label for="cardno" style="color: black;">CARD NO:</label>
-                      <input type="text" class="form-control" id="cardno" data-type="card-number" placeholder="Card number" required maxlength="19" minlength="19">
+                      <input type="text" class="form-control" id="cardno" data-type="card-number" placeholder="Card number" pattern="[0-9]{16}" required maxlength="16" minlength="16">
                     </div>
                   </div> 
                   <div class="form-row">  
@@ -161,21 +161,15 @@
 
 
       $('[data-type="card-number"]').keyup(function() {
-        var value = $(this).val();
+        size = document.getElementById('cardno').value.length
+        if(size == 16){
+          var value = $(this).val();
         value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
         $(this).val(value);
-      });
-
-      $('[data-type="card-number"]').on("change, blur", function() {
-        var value = $(this).val();
-        var maxLength = $(this).attr("maxLength");
-        if (value.length != maxLength) {
-          $(this).addClass("highlight-error");
-        } else {
-          $(this).removeClass("highlight-error");
         }
       });
 
+      
 
     </script>
       
