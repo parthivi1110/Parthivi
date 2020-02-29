@@ -87,7 +87,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
 	  	bonus = 200;
-		// db.collection('users').doc(user.uid).collection('wallet').doc(wallet.id).set({balance:bonus}, {merge: true});   
+		db.collection('users').doc(user.uid).collection('wallet').doc(wallet.id).set({balance:bonus}, {merge: true});   
 
 		// db.collection('users').doc(user.uid).collection('wallet').get().then(docs1 =>{	
 		// 	docs1.forEach(doc1 => {
@@ -105,6 +105,12 @@ firebase.auth().onAuthStateChanged(function(user) {
 						alertnewuser.style.display = "block";
 						$('#alert-newuser').delay(5000).fadeOut('slow');
 					}
+					text = document.getElementById('walletm').textContent;
+			    	balance = parseInt(text, 10);
+			    	if(balance < 200 ){
+			    		const minwallet = document.querySelector("#min-wallet");
+						minwallet.style.display = "block";
+			    	}
 				})	
 		})	  
 
@@ -159,5 +165,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 				})
 			})
 		})
+
+
 	}
 });
