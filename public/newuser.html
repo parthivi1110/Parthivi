@@ -63,9 +63,9 @@
 		  </div>
 
 		  <div class="form-row">
-			  <div class="form-group col-md-12">
+			  <div class="form-group col-md-6">
 			    <label for="adhaar" style="color: black;">Adhaar Number</label>
-			    <input type="text" class="form-control" id="adhaar" pattern="[0-9]{12}" data-type="adhaar-number" minlength="12" maxLength="12" placeholder=" Your Adhaar Number" required>
+			    <input type="text" class="form-control" id="adhaar" onkeypress="return /[0-9]/i.test(event.key)" data-type="adhaar-number" minlength="14" maxLength="14" placeholder=" Your Adhaar Number" required>
 			  </div>
 		  </div>	  
 
@@ -121,13 +121,13 @@
     <script src="js/loader.js"></script>
 
     <script type="text/javascript">
-    	$('[data-type="adhaar-number"]').keyup(function() {
-    		size = document.getElementById('adhaar').value.length
-	    	if(size == 12){
-	    		var value = $(this).val();
-			  value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
-			  $(this).val(value);
-	    	}
+    	$('[data-type="adhaar-number"]').bind("keyup change", function(e) {
+    		if($("#adhaar").val().length == 4){
+           document.getElementById('adhaar').value =  document.getElementById('adhaar').value + " ";
+        }
+        else if(($("#adhaar").val().length == 9)){
+          document.getElementById('adhaar').value =  document.getElementById('adhaar').value + " ";
+        }
     	});
     </script>
 	    

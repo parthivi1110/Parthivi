@@ -82,7 +82,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-12">
                       <label for="cardno" style="color: black;">CARD NO:</label>
-                      <input type="text" class="form-control" id="cardno" data-type="card-number" placeholder="Card number" pattern="[0-9]{16}" required maxlength="16" minlength="16">
+                      <input type="text" class="form-control" id="cardno" data-type="card-number" placeholder="Card number" onkeypress="return /[0-9]/i.test(event.key)" required maxLength="19" minLength="19">
                     </div>
                   </div> 
                   <div class="form-row">  
@@ -160,12 +160,16 @@
       })
 
 
-      $('[data-type="card-number"]').keyup(function() {
-        size = document.getElementById('cardno').value.length
-        if(size == 16){
-          var value = $(this).val();
-        value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
-        $(this).val(value);
+
+      $('[data-type="card-number"]').bind("keyup change", function(e) {
+        if($("#adhaar").val().length == 4){
+           document.getElementById('cardno').value =  document.getElementById('cardno').value + " ";
+        }
+        else if(($("#adhaar").val().length == 9)){
+          document.getElementById('cardno').value =  document.getElementById('cardno').value + " ";
+        }
+        else if(($("#adhaar").val().length == 15)){
+          document.getElementById('cardno').value =  document.getElementById('cardno').value + " ";
         }
       });
 
