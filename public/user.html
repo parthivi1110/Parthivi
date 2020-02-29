@@ -13,11 +13,6 @@
     <!-- Theme Style -->
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <style>
-    html {
-    height: 100%;
-    }
-  </style>
 
   <body style="background-color: black">
     
@@ -30,6 +25,8 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01" >
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
           <form class="form-inline my-2 my-lg-0">
+            <h4 style="margin-left:4px; margin-right: 5px; color: white"><strong>Welcome <span id="navuser">user</span>! </strong> </h4>
+            <a id="cart" href="cart.html" class="btn btn-white btn-outline-white" style="margin: 5px">Cart</a>
             <a id="wallet" href="orders.html" class="btn btn-white btn-outline-white" style="margin: 5px">Orders</a>
             <a id="wallet" href="wallet.html" class="btn btn-white btn-outline-white" style="margin: 5px">Wallet</a>
             <a id="userDetails" href="user.html" class="btn btn-white btn-outline-white" style="margin: 5px">Account Settings</a>
@@ -41,7 +38,7 @@
 
     <div class="container" id="updateuser" style="position: absolute;margin-top:150px; left:10%; right: 10%; width: 60%;margin-bottom: 20px; text-align: center;">
       <div style="width: 20%">
-        <a class="btn btn-white btn-outline-white" style="color: white; margin: 5px;" href="home.html"><i class="fas fa-long-arrow-alt-left">GO BACK</i></a>        
+        <a class="btn btn-white btn-outline-white" style="color: white; margin: 5px;" href="home.html"><i class="fas fa-long-arrow-alt-left">GO HOME</i></a>        
       </div>
       <h2 style="text-align: center;color: gray; font-size: 1.2rem;">EDIT USER DETAILS</h2>
       <form id="update-user">
@@ -75,7 +72,7 @@
           <div class="form-row ">
             <div class="col-md-12 " style="width: 100%">
               <label for="adhaar" style="color: white; margin: 20px">Adhaar Number</label>
-              <input type="text" class="form-control" id="newadhaar" data-type="adhaar-number" minlength="12" maxLength="12" placeholder=" Your Adhaar Number" required>
+              <input type="text" class="form-control" id="newadhaar" onkeypress="return /[0-9]/i.test(event.key)" data-type="adhaar-number" minlength="14" maxLength="14" placeholder=" Your Adhaar Number" required>
             </div>
           </div>
           <div id="update-details" class="alert alert-success" role="alert" style="display:none; font-size: 1rem; margin: 15px 0px; border-radius: 0px; text-align:center;">
@@ -142,23 +139,22 @@
 
       })
 
+      firebase.auth().onAuthStateChanged(function(user) {
+      db.collection('users').doc(user.uid).get().then(doc => {
+        document.getElementById('navuser').innerHTML = doc.data().name;
+      })
+    });
+
         
 
-      $('[data-type="adhaar-number"]').keyup(function() {
-      var value = $(this).val();
-      value = value.replace(/\D/g, "").split(/(?:([\d]{4}))/g).filter(s => s.length > 0).join("-");
-      $(this).val(value);
-    });
-
-    $('[data-type="adhaar-number"]').on("change, blur", function() {
-      var value = $(this).val();
-      var maxLength = $(this).attr("maxLength");
-      if (value.length != maxLength) {
-        $(this).addClass("highlight-error");
-      } else {
-        $(this).removeClass("highlight-error");
-      }
-    });
+      $('[data-type="adhaar-number"]').bind("keyup change", function(e) {
+        if($("#newadhaar").val().length == 4){
+           document.getElementById('newadhaar').value =  document.getElementById('newadhaar').value + " ";
+        }
+        else if(($("#newadhaar").val().length == 9)){
+          document.getElementById('newadhaar').value =  document.getElementById('newadhaar').value + " ";
+        }
+      });
     </script>
       
   </body>

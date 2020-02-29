@@ -23,7 +23,6 @@ firebase.auth().onAuthStateChanged(function(user) {
 			icon.className = "fas fa-credit-card";
 
 			let cross = document.createElement('div');
-			cross.className = "col-sm-1"
 			cross.style.cssText = 'float: right';
 
 			let icon2 = document.createElement('i');
@@ -88,7 +87,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
 	  	bonus = 200;
-		db.collection('users').doc(user.uid).collection('wallet').doc(wallet.id).set({balance:bonus}, {merge: true});   
+		// db.collection('users').doc(user.uid).collection('wallet').doc(wallet.id).set({balance:bonus}, {merge: true});   
 
 		// db.collection('users').doc(user.uid).collection('wallet').get().then(docs1 =>{	
 		// 	docs1.forEach(doc1 => {
@@ -100,7 +99,12 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 		db.collection('users').doc(user.uid).collection('wallet').get().then(docs1 =>{	
 				db.collection('users').doc(user.uid).collection('wallet').doc(wallet.id).get().then( doc => {
-				  	document.getElementById('walletm').innerHTML = doc.data().balance;
+					if(document.getElementById('walletm').innerHTML == 0){
+						document.getElementById('walletm').innerHTML = doc.data().balance;
+						const alertnewuser = document.querySelector("#alert-newuser");
+						alertnewuser.style.display = "block";
+						$('#alert-newuser').delay(5000).fadeOut('slow');
+					}
 				})	
 		})	  
 

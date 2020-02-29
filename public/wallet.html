@@ -13,11 +13,6 @@
     <!-- Theme Style -->
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <style>
-    html {
-    height: 100%;
-    }
-  </style>
 
   <body style="background-color: black">
     
@@ -30,6 +25,8 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01" >
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
           <form class="form-inline my-2 my-lg-0">
+            <h4 style="margin-left:4px; margin-right: 5px; color: white"><strong>Welcome <span id="navuser">user</span>! </strong> </h4>
+            <a id="cart" href="cart.html" class="btn btn-white btn-outline-white" style="margin: 5px">Cart</a>
             <a id="orders" href="orders.html" class="btn btn-white btn-outline-white" style="margin: 5px">Orders</a>
             <a id="wallet" href="wallet.html" class="btn btn-white btn-outline-white" style="margin: 5px">Wallet</a>
             <a id="userDetails" href="user.html" class="btn btn-white btn-outline-white" style="margin: 5px">Account Settings</a>
@@ -44,9 +41,21 @@
           WALLET <i class="fas fa-wallet"></i>
         </div>
         <div class="card-body">
+          <div id="min-wallet" class="alert alert-warning alert-dismissible fade show" role="alert">
+            Please ensure your wallet is always above <strong>Rs.200 at all times!</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
           <h6 class="card-title" style="color: black"><span id="walletun">USERNAME</span></h6>
           <p class="card-text">Current Balance: &#8377<span id="walletm">0</span></p>
           <a href="#" class="btn btn-primary">Add money</a>
+        </div>
+        <div class="alert alert-success" id="alert-newuser" style="display: none; margin: 10px" role="alert">
+          <h4 class="alert-heading">Welcome!</h4>
+          <p>You have been credited with Rs.200 because you're a new user</p>
+          <hr>
+          <p class="mb-0">Have fun ;)</p>
         </div>
       </div>
 
@@ -54,7 +63,7 @@
         <h3 style="font-size: larger">SAVED CARDS</h3>
         
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" class="btn btn-primary" style="margin-bottom: 10px" data-toggle="modal" data-target="#exampleModalCenter">
           Add Card
         </button>
         <div class="alert alert-success" id="addedcard" role="alert" style="display: none">
@@ -162,16 +171,23 @@
 
 
       $('[data-type="card-number"]').bind("keyup change", function(e) {
-        if($("#adhaar").val().length == 4){
+        if($("#cardno").val().length == 4){
            document.getElementById('cardno').value =  document.getElementById('cardno').value + " ";
         }
-        else if(($("#adhaar").val().length == 9)){
+        else if(($("#cardno").val().length == 9)){
           document.getElementById('cardno').value =  document.getElementById('cardno').value + " ";
         }
-        else if(($("#adhaar").val().length == 15)){
+        else if(($("#cardno").val().length == 14)){
           document.getElementById('cardno').value =  document.getElementById('cardno').value + " ";
         }
       });
+
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      db.collection('users').doc(user.uid).get().then(doc => {
+        document.getElementById('navuser').innerHTML = doc.data().name;
+      })
+    }); 
 
       
 
