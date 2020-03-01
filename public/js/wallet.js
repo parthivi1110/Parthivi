@@ -86,8 +86,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 
 
-	  	bonus = 200;
-		db.collection('users').doc(user.uid).collection('wallet').doc(wallet.id).set({balance:bonus}, {merge: true});   
+		db.collection('users').doc(user.uid).collection('wallet').doc(wallet.id).set({balance:0}, {merge: true});   
 
 		// db.collection('users').doc(user.uid).collection('wallet').get().then(docs1 =>{	
 		// 	docs1.forEach(doc1 => {
@@ -99,15 +98,16 @@ firebase.auth().onAuthStateChanged(function(user) {
 
 		db.collection('users').doc(user.uid).collection('wallet').get().then(docs1 =>{	
 				db.collection('users').doc(user.uid).collection('wallet').doc(wallet.id).get().then( doc => {
-					if(document.getElementById('walletm').innerHTML == 0){
-						document.getElementById('walletm').innerHTML = doc.data().balance;
-						const alertnewuser = document.querySelector("#alert-newuser");
-						alertnewuser.style.display = "block";
-						$('#alert-newuser').delay(5000).fadeOut('slow');
-					}
+					// if(document.getElementById('walletm').innerHTML == 0){
+					// 	document.getElementById('walletm').innerHTML = doc.data().balance;
+					// 	const alertnewuser = document.querySelector("#alert-newuser");
+					// 	alertnewuser.style.display = "block";
+					// 	$('#alert-newuser').delay(5000).fadeOut('slow');
+					// }
+					document.getElementById('walletm').innerHTML = doc.data().balance;
 					text = document.getElementById('walletm').textContent;
 			    	balance = parseInt(text, 10);
-			    	if(balance < 200 ){
+			    	if(balance < 150 ){
 			    		const minwallet = document.querySelector("#min-wallet");
 						minwallet.style.display = "block";
 			    	}
