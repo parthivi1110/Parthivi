@@ -70,7 +70,7 @@
          Card Added successfully!
         </div>
         <div class="alert alert-danger" role="alert" id="deletedcard" style="display: none">
-          Card Deleted Successfully!
+          Card Removed Successfully!
         </div>
 
         <!-- Modal -->
@@ -95,9 +95,13 @@
                     </div>
                   </div> 
                   <div class="form-row">  
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-6">
                       <label for="expr" style="color: black;">EXPR DATE:</label>
                       <input type="month" class="form-control" id="cardexpr" required min="2020-04">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="cvv" style="color: black;">CVV</label>
+                      <input type="text" class="form-control" id="cvv" onkeypress="return /[0-9]/i.test(event.key)" required maxLength="3" minLength="3">
                     </div>
                   </div>
                   <div class="modal-footer form-row">
@@ -109,6 +113,60 @@
             </div>
           </div>
         </div>
+       </div> 
+
+
+
+        <div class="jumbotron" id="newaccount" style="width: 70%; margin: auto; margin-bottom:50px">
+          <h3 style="font-size: larger">SAVED ACCOUNTS</h3>
+          
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" style="margin-bottom: 10px" data-toggle="modal" data-target="#exampleModalCenter1">
+            Add Account
+          </button>
+          <div class="alert alert-success" id="addedaccount" role="alert" style="display: none">
+           Account Added successfully!
+          </div>
+          <div class="alert alert-danger" role="alert" id="deletedaccount" style="display: none">
+            Account Removed Successfully!
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle1">Add a new account</h5>
+                </div>
+                <div class="modal-body">
+                  <form id="new-account">
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <label for="accountname" style="color: black;">BANK NAME:</label>
+                        <input type="text" class="form-control" id="accountname" placeholder="Bank Name" required>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <label for="accountno" style="color: black;">ACCOUNT NO:</label>
+                        <input type="text" class="form-control" id="accountno" data-type="account-number" placeholder="Account number" onkeypress="return /[0-9]/i.test(event.key)" required maxLength="18" minLength="9">
+                      </div>
+                    </div> 
+                    <div class="form-row">  
+                      <div class="form-group col-md-12">
+                        <label for="ifsc" style="color: black;">IFSC</label>
+                        <input type="text" class="form-control" id="ifsc" data-type="ifsc" placeholder="IFSC" onkeypress="return /[0-9]/i.test(event.key)" required maxLength="11" minLength="11">
+                      </div>
+                    </div>
+                    <div class="modal-footer form-row">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Add account!</button>
+                    </div>               
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
 
