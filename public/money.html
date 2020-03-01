@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Wallet</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel = "icon" href ="img/favicon.png" type = "image/png"> 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body style="background-color: black">
+    
+    <header role="banner">
+      <nav class="navbar navbar-expand-md navbar-light bg-light" >
+        <a class="navbar-brand" href="home.html" style="color: white"><i class="fas fa-hamburger"></i> Foody</a>
+        <button class="navbar-toggler" type="button" style="background:white" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01" >
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+          <form class="form-inline my-2 my-lg-0">
+            <h4 style="margin-left:4px; margin-right: 5px; color: white"><strong>Welcome <span id="navuser"></span>! </strong> </h4>
+            <a id="cart" href="cart.html" class="btn btn-white btn-outline-white" style="margin: 5px">Cart</a>
+            <a id="orders" href="orders.html" class="btn btn-white btn-outline-white" style="margin: 5px">Orders</a>
+            <a id="wallet" href="wallet.html" class="btn btn-white btn-outline-white" style="margin: 5px">Wallet</a>
+            <a id="userDetails" href="user.html" class="btn btn-white btn-outline-white" style="margin: 5px">Account Settings</a>
+            <a id="logout" class="btn btn-white btn-outline-white" style="color: white; margin: 5px;">Logout</a>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+
+    <div class="card" style="margin:auto; margin-bottom:50px; margin-top:150px; width: 70%">
+        <div class="card-header" style="letter-spacing: 5px;font-size: larger;">
+          PLEASE CHOOSE AN OPTION
+        </div>
+        <div class="card-body">
+          
+        </div>
+      </div>
+
+
+
+
+    <!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#cf1d16"/></svg></div>
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBMtWc2eSZY4iP2tBTwDUCYthDYdJbSKvk",
+    authDomain: "softeng-ca5ca.firebaseapp.com",
+    databaseURL: "https://softeng-ca5ca.firebaseio.com",
+    projectId: "softeng-ca5ca",
+    storageBucket: "softeng-ca5ca.appspot.com",
+    messagingSenderId: "408327246826",
+    appId: "1:408327246826:web:9abe5e21d0f4fce3e2d893",
+    measurementId: "G-Q396W6J4M3"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+
+</script>
+
+
+    <script src="js/popper.min.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/loader.js"></script>
+    <script src="js/logout.js"></script>
+
+    <script type="text/javascript">
+
+      document.querySelector(".navbar-toggler").addEventListener('click', (e) => {
+        if ($("#navbarTogglerDemo01").hasClass("show") == true ) {
+           document.getElementById("navbarTogglerDemo01").style.background = "";
+        } else {
+          document.getElementById("navbarTogglerDemo01").style.background = "gray";
+          document.getElementById("navbarTogglerDemo01").style.opacity = "0.8";
+        }
+      })
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      db.collection('users').doc(user.uid).get().then(doc => {
+        document.getElementById('navuser').innerHTML = doc.data().name;
+      })
+    }); 
+
+      
+
+    </script>
+      
+  </body>
+</html>
